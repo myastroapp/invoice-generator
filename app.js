@@ -13,9 +13,9 @@ function addItem(desc = "", qty = "1", price = "") {
   const row = document.createElement("div");
   row.className = "li";
   row.innerHTML =
-    `<input class="desc" placeholder="Description" value="${escAttr(desc)}">` +
-    `<input class="qty" type="number" value="${escAttr(qty)}">` +
-    `<input class="price" type="number" placeholder="0.00" value="${escAttr(price)}">` +
+    `<input class="desc" placeholder="Description" aria-label="Item description" value="${escAttr(desc)}">` +
+    `<input class="qty" type="number" aria-label="Quantity" value="${escAttr(qty)}">` +
+    `<input class="price" type="number" placeholder="0.00" aria-label="Unit price" value="${escAttr(price)}">` +
     `<button class="rm" title="Remove">×</button>`;
   row.querySelector(".rm").addEventListener("click", () => { row.remove(); render(); });
   row.querySelectorAll("input").forEach((i) => i.addEventListener("input", render));
