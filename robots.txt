@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://myastroapp.github.io/invoice-generator/sitemap.xml
