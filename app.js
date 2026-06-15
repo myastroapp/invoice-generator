@@ -62,6 +62,12 @@ function wire() {
   addItem("Consulting", "2", "120");
   try { $("invDate").value = new Date().toISOString().slice(0, 10); } catch { /* ignore */ }
   document.querySelectorAll(".form input, .form textarea").forEach((i) => i.addEventListener("input", render));
+  const dateLabels = { invDate: "Invoice date", dueDate: "Due date" };
+  for (const inp of document.querySelectorAll(".form input, .form textarea")) {
+    if (inp.getAttribute("aria-label")) continue;
+    const al = dateLabels[inp.id] || inp.placeholder;
+    if (al) inp.setAttribute("aria-label", al);
+  }
   $("btn-add").addEventListener("click", () => { addItem(); render(); });
   $("btn-print").addEventListener("click", () => window.print());
   $("btn-logo").addEventListener("click", () => { if (!isPro()) { openUnlock(); return; } $("logo").click(); });
