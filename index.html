@@ -40,17 +40,17 @@
     /* The printable invoice */
     .invoice{background:#fff;color:var(--ink);max-width:720px;margin:0 auto;padding:42px 46px;border:1px solid var(--border);box-shadow:0 1px 6px rgba(0,0,0,.06);font-size:14px}
     .inv-head{display:flex;justify-content:space-between;align-items:flex-start}
-    .inv-head .from{max-width:60%}.inv-title{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#111;margin:0}
+    .inv-head .from{max-width:60%}.inv-title{font-size:30px;font-weight:800;letter-spacing:-.02em;color:var(--inv-accent,#111);margin:0}
     .biz{font-weight:700;font-size:16px}.muted2{color:#666}
     .meta{margin-top:6px;text-align:right;color:#444;font-size:13px}
     .bill{margin:26px 0 14px}.bill .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#888}
     table.items{width:100%;border-collapse:collapse;margin-top:8px}
-    table.items th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#888;border-bottom:2px solid #eee;padding:6px 4px}
+    table.items th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#888;border-bottom:2px solid var(--inv-accent,#eee);padding:6px 4px}
     table.items td{padding:7px 4px;border-bottom:1px solid #f0f0f0}
     table.items td.r,table.items th.r{text-align:right}
     .totals{margin-top:14px;margin-left:auto;width:240px}
     .totals div{display:flex;justify-content:space-between;padding:4px 0}
-    .totals .grand{border-top:2px solid #eee;margin-top:4px;padding-top:8px;font-weight:800;font-size:17px}
+    .totals .grand{border-top:2px solid #eee;margin-top:4px;padding-top:8px;font-weight:800;font-size:17px;color:var(--inv-accent,inherit)}
     .notes{margin-top:24px;color:#444;font-size:13px;white-space:pre-wrap}
     .credit{margin-top:30px;text-align:center;color:#aaa;font-size:11px}
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:50}
@@ -82,6 +82,8 @@
       <input id="bizDetails" placeholder="Email · phone · address" value="you@example.com" />
       <button id="btn-logo" type="button" style="width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer;margin-bottom:7px">+ Add logo (Pro)</button>
       <input id="logo" type="file" accept="image/*" hidden />
+      <button id="btn-color" type="button" style="width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer;margin-bottom:7px">🎨 Brand color (Pro)</button>
+      <input id="brandColor" type="color" value="#4f46e5" hidden />
       <h3>Bill to</h3>
       <input id="clientName" placeholder="Client name" value="Client Name" />
       <input id="clientDetails" placeholder="Client email · address" value="client@example.com" />
@@ -123,7 +125,7 @@
     <div class="modal-card">
       <button id="unlock-close" class="modal-x" aria-label="Close">×</button>
       <h2>Unlock Pro — brand your invoices</h2>
-      <p>Add your logo and remove the "created with" footer, so every invoice is fully your brand. One-time <strong>$12</strong>, lifetime, runs in your browser.</p>
+      <p>Add your logo, set your brand color, and remove the "created with" footer — so every invoice is fully your brand. One-time <strong>$12</strong>, lifetime, runs in your browser.</p>
       <a class="cta" id="buy" href="#" target="_blank" rel="noopener">Unlock for $12 →</a>
       <p class="small">Already purchased? Enter your code:</p>
       <div class="code-row"><input id="code" placeholder="INV-PRO-…" autocomplete="off" /><button id="btn-code">Unlock</button></div>

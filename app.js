@@ -72,6 +72,11 @@ function wire() {
     r.onload = () => { $("p-logo").src = r.result; $("p-logo").style.display = "block"; };
     r.readAsDataURL(f);
   });
+  const applyColor = (c) => $("invoice").style.setProperty("--inv-accent", c);
+  let savedColor = null; try { savedColor = localStorage.getItem("inv_color"); } catch { /* ignore */ }
+  if (savedColor && isPro()) applyColor(savedColor);
+  $("btn-color").addEventListener("click", () => { if (!isPro()) { openUnlock(); return; } $("brandColor").click(); });
+  $("brandColor").addEventListener("change", () => { applyColor($("brandColor").value); try { localStorage.setItem("inv_color", $("brandColor").value); } catch { /* ignore */ } });
   $("p-credit").addEventListener("click", openUnlock);
   $("p-credit").title = "Remove this footer (Pro)";
   $("p-credit").style.cursor = "pointer";
