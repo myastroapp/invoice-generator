@@ -1,0 +1,21 @@
+{
+  "name": "Invoice Generator",
+  "short_name": "Invoice Generator",
+  "description": "Make a professional invoice and download a PDF in seconds. No sign-up, in-browser.",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#4f46e5",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
