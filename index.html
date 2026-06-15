@@ -80,6 +80,8 @@
       <h3>Your business</h3>
       <input id="bizName" placeholder="Your business name" value="Your Business" />
       <input id="bizDetails" placeholder="Email · phone · address" value="you@example.com" />
+      <button id="btn-logo" type="button" style="width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer;margin-bottom:7px">+ Add logo (Pro)</button>
+      <input id="logo" type="file" accept="image/*" hidden />
       <h3>Bill to</h3>
       <input id="clientName" placeholder="Client name" value="Client Name" />
       <input id="clientDetails" placeholder="Client email · address" value="client@example.com" />
@@ -97,7 +99,7 @@
     <div class="preview-wrap">
       <div class="invoice" id="invoice">
         <div class="inv-head">
-          <div class="from"><div class="biz" id="p-biz">Your Business</div><div class="muted2" id="p-bizd">you@example.com</div></div>
+          <div class="from"><img id="p-logo" alt="logo" style="max-height:60px;max-width:200px;margin-bottom:10px;display:none" /><div class="biz" id="p-biz">Your Business</div><div class="muted2" id="p-bizd">you@example.com</div></div>
           <div><h1 class="inv-title">INVOICE</h1><div class="meta" id="p-meta"></div></div>
         </div>
         <div class="bill"><div class="lbl">Bill to</div><div id="p-client" style="font-weight:600">Client Name</div><div class="muted2" id="p-clientd">client@example.com</div></div>
@@ -116,8 +118,8 @@
   <div id="unlock" class="modal" hidden>
     <div class="modal-card">
       <button id="unlock-close" class="modal-x" aria-label="Close">×</button>
-      <h2>Remove the footer credit</h2>
-      <p>Send clean, fully-branded invoices with no "created with" line. One-time <strong>$12</strong>, lifetime, runs in your browser.</p>
+      <h2>Unlock Pro — brand your invoices</h2>
+      <p>Add your logo and remove the "created with" footer, so every invoice is fully your brand. One-time <strong>$12</strong>, lifetime, runs in your browser.</p>
       <a class="cta" id="buy" href="#" target="_blank" rel="noopener">Unlock for $12 →</a>
       <p class="small">Already purchased? Enter your code:</p>
       <div class="code-row"><input id="code" placeholder="INV-PRO-…" autocomplete="off" /><button id="btn-code">Unlock</button></div>

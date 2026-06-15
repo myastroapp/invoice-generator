@@ -64,6 +64,14 @@ function wire() {
   document.querySelectorAll(".form input, .form textarea").forEach((i) => i.addEventListener("input", render));
   $("btn-add").addEventListener("click", () => { addItem(); render(); });
   $("btn-print").addEventListener("click", () => window.print());
+  $("btn-logo").addEventListener("click", () => { if (!isPro()) { openUnlock(); return; } $("logo").click(); });
+  $("logo").addEventListener("change", () => {
+    const f = $("logo").files?.[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => { $("p-logo").src = r.result; $("p-logo").style.display = "block"; };
+    r.readAsDataURL(f);
+  });
   $("p-credit").addEventListener("click", openUnlock);
   $("p-credit").title = "Remove this footer (Pro)";
   $("p-credit").style.cursor = "pointer";
