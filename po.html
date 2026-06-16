@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Free Invoice Generator — No Sign-Up, Instant PDF Download</title>
-  <meta name="description" content="Create a professional invoice and download it as a PDF in seconds. Free, no sign-up, runs in your browser. Add your business, client, line items, tax, and notes." />
-  <link rel="canonical" href="https://myastroapp.github.io/invoice-generator/" />
+  <title>Free Purchase Order Generator — Create &amp; Download a PDF PO</title>
+  <meta name="description" content="Create a professional purchase order and download it as a PDF in seconds. Free, no sign-up, runs in your browser. Add your business, the vendor, line items, and delivery date." />
+  <link rel="canonical" href="https://myastroapp.github.io/invoice-generator/po.html" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Invoice Generator" />
-  <meta property="og:title" content="Free Invoice Generator" />
-  <meta property="og:description" content="Create a professional invoice and download a PDF in seconds. No sign-up, in your browser." />
-  <meta property="og:url" content="https://myastroapp.github.io/invoice-generator/" />
+  <meta property="og:site_name" content="Purchase Order Generator" />
+  <meta property="og:title" content="Free Purchase Order Generator" />
+  <meta property="og:description" content="Create a professional purchase order and download a PDF in seconds. No sign-up, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/invoice-generator/po.html" />
   <meta property="og:image" content="https://myastroapp.github.io/invoice-generator/og-default.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -37,7 +37,6 @@
     .li{display:flex;gap:6px;align-items:center;margin-bottom:6px}
     .li input.desc{flex:3}.li input.qty,.li input.price{flex:1;text-align:right}.li button{padding:4px 9px}
     .preview-wrap{padding:24px;background:var(--soft);min-height:80vh}
-    /* The printable invoice */
     .invoice{background:#fff;color:var(--ink);max-width:720px;margin:0 auto;padding:42px 46px;border:1px solid var(--border);box-shadow:0 1px 6px rgba(0,0,0,.06);font-size:14px}
     .inv-head{display:flex;justify-content:space-between;align-items:flex-start}
     .inv-head .from{max-width:60%}.inv-title{font-size:30px;font-weight:800;letter-spacing:-.02em;color:var(--inv-accent,#111);margin:0}
@@ -68,46 +67,43 @@
 </head>
 <body>
   <div class="topbar">
-    <a class="logo" href="./">Invoice Generator</a>
+    <a class="logo" href="po.html">Purchase Order Generator</a>
+    <a href="./" style="color:var(--muted);text-decoration:none;font-size:13px">Invoice generator</a>
     <a href="quote.html" style="color:var(--muted);text-decoration:none;font-size:13px">Estimate / quote</a>
-    <a href="receipt.html" style="color:var(--muted);text-decoration:none;font-size:13px">Receipt</a>
-    <a href="po.html" style="color:var(--muted);text-decoration:none;font-size:13px">Purchase order</a>
-    <a href="how-to-write-an-invoice.html" style="color:var(--muted);text-decoration:none;font-size:13px">How to write an invoice</a>
-    <a href="unpaid-invoice.html" style="color:var(--muted);text-decoration:none;font-size:13px">Unpaid invoice?</a>
     <span class="spacer"></span>
     <button id="btn-print" class="primary">Download / Print PDF</button>
   </div>
 
   <div class="layout">
     <div class="form">
-      <h3>Your business</h3>
+      <h3>Your business (buyer)</h3>
       <input id="bizName" placeholder="Your business name" value="Your Business" />
       <input id="bizDetails" placeholder="Email · phone · address" value="you@example.com" />
       <button id="btn-logo" type="button" style="width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer;margin-bottom:7px">+ Add logo (Pro)</button>
       <input id="logo" type="file" accept="image/*" hidden />
       <button id="btn-color" type="button" style="width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer;margin-bottom:7px">🎨 Brand color (Pro)</button>
       <input id="brandColor" type="color" value="#4f46e5" hidden />
-      <h3>Bill to</h3>
-      <input id="clientName" placeholder="Client name" value="Client Name" />
-      <input id="clientDetails" placeholder="Client email · address" value="client@example.com" />
-      <h3>Invoice details</h3>
-      <div class="row2"><input id="invNo" placeholder="Invoice #" value="INV-001" /><input id="invDate" type="date" /></div>
+      <h3>Vendor / supplier</h3>
+      <input id="clientName" placeholder="Vendor name" value="Vendor Name" />
+      <input id="clientDetails" placeholder="Vendor email · address" value="vendor@example.com" />
+      <h3>PO details</h3>
+      <div class="row2"><input id="invNo" placeholder="PO #" value="PO-001" /><input id="invDate" type="date" /></div>
       <input id="dueDate" type="date" />
       <h3>Line items</h3>
       <div id="items"></div>
       <button id="btn-add">+ Add line item</button>
       <h3>Tax &amp; notes</h3>
       <div class="row2"><input id="taxRate" type="number" step="0.1" placeholder="Tax %" value="0" /><input id="currency" placeholder="$" value="$" /></div>
-      <textarea id="notes" rows="3" placeholder="Notes / payment terms">Thank you for your business!</textarea>
+      <textarea id="notes" rows="3" placeholder="Notes / terms">Please confirm receipt and the delivery date.</textarea>
     </div>
 
     <div class="preview-wrap">
       <div class="invoice" id="invoice">
         <div class="inv-head">
           <div class="from"><img id="p-logo" alt="logo" style="max-height:60px;max-width:200px;margin-bottom:10px;display:none" /><div class="biz" id="p-biz">Your Business</div><div class="muted2" id="p-bizd">you@example.com</div></div>
-          <div><h1 class="inv-title">INVOICE</h1><div class="meta" id="p-meta"></div></div>
+          <div><h1 class="inv-title">PURCHASE ORDER</h1><div class="meta" id="p-meta"></div></div>
         </div>
-        <div class="bill"><div class="lbl">Bill to</div><div id="p-client" style="font-weight:600">Client Name</div><div class="muted2" id="p-clientd">client@example.com</div></div>
+        <div class="bill"><div class="lbl">Vendor</div><div id="p-client" style="font-weight:600">Vendor Name</div><div class="muted2" id="p-clientd">vendor@example.com</div></div>
         <table class="items"><thead><tr><th>Description</th><th class="r">Qty</th><th class="r">Price</th><th class="r">Amount</th></tr></thead><tbody id="p-items"></tbody></table>
         <div class="totals">
           <div><span>Subtotal</span><span id="p-sub"></span></div>
@@ -115,43 +111,38 @@
           <div class="grand"><span>Total</span><span id="p-total"></span></div>
         </div>
         <div class="notes" id="p-notes"></div>
-        <div class="credit" id="p-credit">Invoice created with myastroapp.github.io/invoice-generator</div>
+        <div class="credit" id="p-credit">Purchase order created with myastroapp.github.io/invoice-generator</div>
       </div>
     </div>
   </div>
 
   <section style="max-width:720px;margin:34px auto 0;padding:0 24px;font:15px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg)">
-    <h2 style="font-size:20px;margin:0 0 8px">Free invoice generator — no sign-up</h2>
-    <p style="color:var(--muted)">Create a professional invoice with your business details, client, line items, tax, and notes, then download it as a PDF — right in your browser. No account, no sign-up, and nothing is uploaded. An optional one-time Pro adds your logo and brand color; there's no subscription.</p>
+    <h2 style="font-size:20px;margin:0 0 8px">Free purchase order generator — no sign-up</h2>
+    <p style="color:var(--muted)">Create a professional purchase order to send a supplier — your business as buyer, the vendor, line items, and a delivery date — then download it as a PDF, right in your browser. No account, no sign-up, nothing uploaded. The optional one-time Pro adds your logo and brand color.</p>
+    <h3 style="font-size:16px;margin:18px 0 4px">What's a purchase order?</h3>
+    <p style="color:var(--muted)">A purchase order (PO) is a document a <em>buyer</em> sends a <em>vendor</em> to formally order goods or services at agreed prices. The vendor later sends an <a href="./">invoice</a> referencing the PO number. It's the procurement-side counterpart to an invoice.</p>
     <h3 style="font-size:16px;margin:18px 0 4px">Is it free?</h3>
-    <p style="color:var(--muted)">Yes. Creating an invoice and downloading it as a PDF is completely free. A one-time $12 Pro adds your logo and brand color and removes the small footer credit — no recurring fee.</p>
-    <h3 style="font-size:16px;margin:18px 0 4px">Do I need to sign up or create an account?</h3>
-    <p style="color:var(--muted)">No. There's no sign-up, login, or email required — open the page and start invoicing.</p>
-    <h3 style="font-size:16px;margin:18px 0 4px">Can I add my own logo and brand color?</h3>
-    <p style="color:var(--muted)">Yes, with the one-time Pro: upload your logo and pick a brand color that styles the invoice title, column headers, and total.</p>
-    <h3 style="font-size:16px;margin:18px 0 4px">Is my data private?</h3>
-    <p style="color:var(--muted)">Completely. The generator runs entirely in your browser — your business and client details are never sent to or stored on any server.</p>
-    <h3 style="font-size:16px;margin:18px 0 4px">How do I download the invoice as a PDF?</h3>
-    <p style="color:var(--muted)">Click "Download / Print PDF" and choose "Save as PDF" in your browser's print dialog to get a clean, print-ready invoice.</p>
+    <p style="color:var(--muted)">Yes — creating and downloading a PO as a PDF is free. A one-time $12 Pro adds your logo and brand color and removes the footer, and unlocks the matching <a href="./">invoice</a>, <a href="quote.html">estimate</a>, and <a href="receipt.html">receipt</a> generators.</p>
+    <h3 style="font-size:16px;margin:18px 0 4px">Do I need to sign up?</h3>
+    <p style="color:var(--muted)">No sign-up, login, or email — open the page and start.</p>
   </section>
 
   <footer style="text-align:center;padding:18px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);font-family:system-ui,sans-serif">
-    More free tools: <a href="https://myastroapp.github.io/json-viewer/" style="color:var(--accent)">JSON tools</a> &nbsp;·&nbsp; <a href="https://myastroapp.github.io/rental-calculator/" style="color:var(--accent)">Finance calculators</a> &nbsp;·&nbsp; <a href="https://myastroapp.github.io/resume-builder/" style="color:var(--accent)">Resume builder</a>
+    More free tools: <a href="./" style="color:var(--accent)">Invoice</a> &nbsp;·&nbsp; <a href="quote.html" style="color:var(--accent)">Estimate</a> &nbsp;·&nbsp; <a href="receipt.html" style="color:var(--accent)">Receipt</a> &nbsp;·&nbsp; <a href="https://myastroapp.github.io/json-viewer/" style="color:var(--accent)">JSON tools</a>
   </footer>
 
   <div id="unlock" class="modal" hidden>
     <div class="modal-card">
       <button id="unlock-close" class="modal-x" aria-label="Close">×</button>
-      <h2>Unlock Pro — brand your invoices</h2>
-      <p>Add your logo, set your brand color, and remove the "created with" footer — so every invoice is fully your brand. One-time <strong>$12</strong>, lifetime, runs in your browser.</p>
+      <h2>Unlock Pro — brand your documents</h2>
+      <p>Add your logo, set your brand color, and remove the "created with" footer — across purchase orders, invoices, estimates, and receipts. One-time <strong>$12</strong>, lifetime, runs in your browser.</p>
       <a class="cta" id="buy" href="#" target="_blank" rel="noopener">Unlock for $12 →</a>
       <p class="small">Already purchased? Enter your code:</p>
       <div class="code-row"><input id="code" placeholder="INV-PRO-…" autocomplete="off" /><button id="btn-code">Unlock</button></div>
     </div>
   </div>
 
-  <script type="module" src="app.js"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Invoice Generator","url":"https://myastroapp.github.io/invoice-generator/","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free invoice generator — create and download a professional PDF invoice in your browser. Live preview, automatic totals, no sign-up."}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Creating an invoice and downloading it as a PDF is completely free. A one-time $12 Pro adds your logo and brand color and removes the small footer credit — no recurring fee."}},{"@type":"Question","name":"Do I need to sign up or create an account?","acceptedAnswer":{"@type":"Answer","text":"No. There is no sign-up, login, or email required — open the page and start invoicing."}},{"@type":"Question","name":"Can I add my own logo and brand color?","acceptedAnswer":{"@type":"Answer","text":"Yes, with the one-time Pro: upload your logo and pick a brand color that styles the invoice title, column headers, and total."}},{"@type":"Question","name":"Is my data private?","acceptedAnswer":{"@type":"Answer","text":"Completely. The generator runs entirely in your browser — your business and client details are never sent to or stored on any server."}},{"@type":"Question","name":"How do I download the invoice as a PDF?","acceptedAnswer":{"@type":"Answer","text":"Click Download / Print PDF and choose Save as PDF in your browser's print dialog to get a clean, print-ready invoice."}}]}</script>
+  <script type="module" src="po-app.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Purchase Order Generator","url":"https://myastroapp.github.io/invoice-generator/po.html","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free purchase order generator — create and download a professional PDF purchase order in your browser. No sign-up."}</script>
 </body>
 </html>
